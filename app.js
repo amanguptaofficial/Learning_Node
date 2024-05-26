@@ -17,6 +17,7 @@ console.log(chalk.red("error: ", err))
 })
 
 app.use('/',router)
+
                                            
 app.listen(4000,()=>{
     console.log(chalk.blue('Server started....'))

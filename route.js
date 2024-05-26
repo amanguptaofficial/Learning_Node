@@ -1,18 +1,10 @@
 const express = require('express');
+const controller = require('./src/controller/userController')
 const router = express.Router();
 
-router.get('/', function(req,res){
-    res.send("Hello test for get api");
-})
-router.get('/get-author', function(req,res){
-    res.send("Hello test for get author");
-})
-router.post('/add-author', function(req,res){
-    res.send("Hello test for get api");
-})
-router.delete('/remove-author', function(req,res){
-    res.send("Hello test for get api");
-})
+
+router.get('/get-user-info',controller.userInfo)
+router.get('/get-user-account-info', controller.userAccountDetails)
 
 
 module.exports = router;
