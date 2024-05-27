@@ -1,26 +1,44 @@
+const userInfoDb = require("../Model/userSchema");
+const {
+  addUserInfoService,
+  getAllUsersService,
+  getUsersService,
+} = require("../service/userService");
 
+const addUserInfo = async (req, res) => {
+  try {
+    let requestData = req?.body;
+    let data = await addUserInfoService(requestData);
+    res.send({ code: 200, msg: "success", data: data });
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+};
 
-function userInfo (req,res){
-    try {
-        let userInfo = {
-            name:"John",
-            age: 23,
-            mobile:9994833333
-        }
-        res.status(200).send(userInfo)
-    } catch (error) {
-        res.send({msg:error.message})
-    }
-    
-}
+const getAllUsers = async (req, res) => {
+  try {
+    let data = await getAllUsersService();
+    res.send({ code: 200, msg: "Success", data: data });
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+};
+const getUser = async (req, res) => {
+  try {
+    let result = await getUsersService(req.query);
+    res.send(result);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+};
+const getUserById = async (req, res) => {
+  try {
+    console.log(req.params);
+    //   let result =  await getUsersService(req.query);
+    //   res.send(result)
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+};
 
-function userAccountDetails(req,res){
-    let userAccountInfo = {
-        name:"John",
-        bankName:"SBI",
-        ifsc:"SBIN948DCKE"
-    }
-    res.send(userAccountInfo)
-}
-
-module.exports = {userInfo,userAccountDetails}
+module.exports = { addUserInfo, getAllUsers, getUser, getUserById };
